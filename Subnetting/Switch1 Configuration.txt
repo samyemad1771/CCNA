@@ -1,0 +1,79 @@
+#Connect Switch1 Vlan
+
+S1>en
+S1#conf ter
+S1(config)#interface ?
+  Dot11Radio        Dot11 interface
+  FastEthernet      FastEthernet IEEE 802.3
+  GigabitEthernet   GigabitEthernet IEEE 802.3z
+  Loopback          Loopback interface
+  Port-channel      Ethernet Channel of interfaces
+  Serial            Serial
+  Tunnel            Tunnel interface
+  Virtual-Template  Virtual Template interface
+  Vlan              Catalyst Vlans
+  range             interface range command
+S1(config)#interface vlan 1
+S1(config-if)#no shut
+S1(config-if)#ip address 192.168.1.61 255.255.255.192
+S1(config-if)#end
+S1#
+%SYS-5-CONFIG_I: Configured from console by console
+
+S1#show ip interface brief 
+
+Interface              IP-Address      OK? Method Status                Protocol 
+GigabitEthernet1/0/1   unassigned      YES unset  up                    up 
+GigabitEthernet1/0/2   unassigned      YES unset  up                    up 
+GigabitEthernet1/0/3   unassigned      YES unset  up                    up 
+GigabitEthernet1/0/4   unassigned      YES unset  up                    up 
+GigabitEthernet1/0/5   unassigned      YES unset  up                    up 
+GigabitEthernet1/0/6   unassigned      YES unset  down                  down 
+GigabitEthernet1/0/7   unassigned      YES unset  down                  down 
+GigabitEthernet1/0/8   unassigned      YES unset  down                  down 
+GigabitEthernet1/0/9   unassigned      YES unset  down                  down 
+GigabitEthernet1/0/10  unassigned      YES unset  down                  down 
+GigabitEthernet1/0/11  unassigned      YES unset  down                  down 
+GigabitEthernet1/0/12  unassigned      YES unset  down                  down 
+GigabitEthernet1/0/13  unassigned      YES unset  down                  down 
+GigabitEthernet1/0/14  unassigned      YES unset  down                  down 
+GigabitEthernet1/0/15  unassigned      YES unset  down                  down 
+GigabitEthernet1/0/16  unassigned      YES unset  down                  down 
+GigabitEthernet1/0/17  unassigned      YES unset  down                  down 
+GigabitEthernet1/0/18  unassigned      YES unset  down                  down 
+GigabitEthernet1/0/19  unassigned      YES unset  down                  down 
+GigabitEthernet1/0/20  unassigned      YES unset  down                  down 
+GigabitEthernet1/0/21  unassigned      YES unset  down                  down 
+GigabitEthernet1/0/22  unassigned      YES unset  down                  down 
+GigabitEthernet1/0/23  unassigned      YES unset  down                  down 
+GigabitEthernet1/0/24  unassigned      YES unset  down                  down 
+GigabitEthernet1/1/1   unassigned      YES unset  down                  down 
+GigabitEthernet1/1/2   unassigned      YES unset  down                  down 
+GigabitEthernet1/1/3   unassigned      YES unset  down                  down 
+GigabitEthernet1/1/4   unassigned      YES unset  down                  down 
+Vlan1                  192.168.1.61    YES manual up                    up
+
+S1#wr
+Building configuration...
+Compressed configuration from 7383 bytes to 3601 bytes[OK]
+[OK]
+
+S1#conf te
+
+S1(config)#ip default-gateway 192.168.1.62
+S1(config)#end
+S1#
+%SYS-5-CONFIG_I: Configured from console by console
+
+S1#ping 192.168.1.62
+
+Type escape sequence to abort.
+Sending 5, 100-byte ICMP Echos to 192.168.1.62, timeout is 2 seconds:
+.!!!!
+Success rate is 80 percent (4/5), round-trip min/avg/max = 0/0/0 ms
+
+S1#wr
+Building configuration...
+Compressed configuration from 7383 bytes to 3601 bytes[OK]
+[OK]
+S1#

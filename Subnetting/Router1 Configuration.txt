@@ -1,0 +1,96 @@
+#Connect With Switch And SUbnet1  192.168.1.0/26
+
+R1>en
+R1#show ip interface brief
+Interface              IP-Address      OK? Method Status                Protocol 
+GigabitEthernet0/0/0   unassigned      YES unset  administratively down down 
+GigabitEthernet0/0/1   unassigned      YES unset  administratively down down 
+Serial0/1/0            unassigned      YES unset  administratively down down 
+Serial0/1/1            unassigned      YES unset  administratively down down 
+Loopback0              1.1.1.1         YES manual up                    up 
+Vlan1                  unassigned      YES unset  administratively down down
+
+R1#conf ter
+Enter configuration commands, one per line.  End with CNTL/Z.
+R1(config)#interf
+R1(config)#interface giga
+R1(config)#interface gigabitEthernet 0/0/0
+R1(config-if)#no shut
+
+R1(config-if)#
+%LINK-5-CHANGED: Interface GigabitEthernet0/0/0, changed state to up
+
+%LINEPROTO-5-UPDOWN: Line protocol on Interface GigabitEthernet0/0/0, changed state to up
+
+R1(config-if)#ip address 192.168.1.62 255.255.255.192
+R1(config-if)#end
+R1#
+%SYS-5-CONFIG_I: Configured from console by console
+
+R1#show ip interface brief 
+Interface              IP-Address      OK? Method Status                Protocol 
+GigabitEthernet0/0/0   192.168.1.62    YES manual up                    up 
+GigabitEthernet0/0/1   unassigned      YES unset  administratively down down 
+Serial0/1/0            unassigned      YES unset  administratively down down 
+Serial0/1/1            unassigned      YES unset  administratively down down 
+Loopback0              1.1.1.1         YES manual up                    up 
+Vlan1                  unassigned      YES unset  administratively down down
+R1#ping 192.168.1.62
+
+Type escape sequence to abort.
+Sending 5, 100-byte ICMP Echos to 192.168.1.62, timeout is 2 seconds:
+!!!!!
+Success rate is 100 percent (5/5), round-trip min/avg/max = 2/3/7 ms
+_____________________________________________________________________________________________
+Connect With Second Network
+
+
+R1>en
+R1#show ip inter brief
+Interface              IP-Address      OK? Method Status                Protocol 
+GigabitEthernet0/0/0   192.168.1.62    YES manual up                    up 
+GigabitEthernet0/0/1   unassigned      YES unset  administratively down down 
+Serial0/1/0            unassigned      YES unset  administratively down down 
+Serial0/1/1            unassigned      YES unset  administratively down down 
+Loopback0              1.1.1.1         YES manual up                    up 
+Vlan1                  unassigned      YES unset  administratively down down
+
+R1#conf ter
+Enter configuration commands, one per line.  End with CNTL/Z.
+
+R1(config)#interface ?
+  Dialer            Dialer interface
+  Dot11Radio        Dot11 interface
+  Ethernet          IEEE 802.3
+  FastEthernet      FastEthernet IEEE 802.3
+  GigabitEthernet   GigabitEthernet IEEE 802.3z
+  Loopback          Loopback interface
+  Port-channel      Ethernet Channel of interfaces
+  Serial            Serial
+  Tunnel            Tunnel interface
+  Virtual-Template  Virtual Template interface
+  Vlan              Catalyst Vlans
+  range             interface range command
+R1(config)#interface serial 0/1/0
+
+R1(config-if)#ip address 192.168.1.65 255.255.255.192
+R1(config-if)#no shut
+
+R1(config-if)#
+%LINK-5-CHANGED: Interface Serial0/1/0, changed state to up
+
+R1(config-if)#
+%LINEPROTO-5-UPDOWN: Line protocol on Interface Serial0/1/0, changed state to up
+
+R1(config-if)#end
+R1#
+%SYS-5-CONFIG_I: Configured from console by console
+
+R1#show ip interface brief
+Interface              IP-Address      OK? Method Status                Protocol 
+GigabitEthernet0/0/0   192.168.1.62    YES manual up                    up 
+GigabitEthernet0/0/1   unassigned      YES unset  administratively down down 
+Serial0/1/0            192.168.1.65    YES manual up                    up 
+Serial0/1/1            unassigned      YES unset  administratively down down 
+Loopback0              1.1.1.1         YES manual up                    up 
+Vlan1                  unassigned      YES unset  administratively down down

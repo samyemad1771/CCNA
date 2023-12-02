@@ -1,0 +1,78 @@
+Connect Second Network 192.168.1.64/26
+
+IntRouter>en
+IntRouter#show ip inter brief
+Interface              IP-Address      OK? Method Status                Protocol 
+GigabitEthernet0/0/0   unassigned      YES unset  administratively down down 
+GigabitEthernet0/0/1   8.8.8.100       YES DHCP   up                    up 
+Serial0/1/0            unassigned      YES unset  up                    up 
+Serial0/1/1            unassigned      YES unset  down                  down 
+Loopback0              3.3.3.3         YES manual up                    up 
+Vlan1                  unassigned      YES unset  administratively down down
+IntRouter#conf ter
+Enter configuration commands, one per line.  End with CNTL/Z.
+
+IntRouter(config)#interface serial 0/1/0
+IntRouter(config-if)#no shut
+IntRouter(config-if)#ip add
+IntRouter(config-if)#ip address 192.168.1.126 255.255.255.192
+IntRouter(config-if)#end
+
+07:40:18: %OSPF-5-ADJCHG: Process 1, Nbr 1.1.1.1 on Serial0/1/0 from LOADING to FULL, Loading Done
+
+IntRouter#
+%SYS-5-CONFIG_I: Configured from console by console
+
+IntRouter#show ip inter brie
+Interface              IP-Address      OK? Method Status                Protocol 
+GigabitEthernet0/0/0   unassigned      YES unset  administratively down down 
+GigabitEthernet0/0/1   8.8.8.100       YES DHCP   up                    up 
+Serial0/1/0            192.168.1.126   YES manual up                    up 
+Serial0/1/1            unassigned      YES unset  down                  down 
+Loopback0              3.3.3.3         YES manual up                    up 
+Vlan1                  unassigned      YES unset  administratively down down
+
+IntRouter#write
+-___________________________________________________________________________________________
+Connect Fourth Network 192.168.1.192
+
+IntRouter>en
+IntRouter#show ip inter  brief
+Interface              IP-Address      OK? Method Status                Protocol 
+GigabitEthernet0/0/0   unassigned      YES unset  administratively down down 
+GigabitEthernet0/0/1   8.8.8.100       YES DHCP   up                    up 
+Serial0/1/0            192.168.1.126   YES manual up                    up 
+Serial0/1/1            unassigned      YES unset  up                    up 
+Loopback0              3.3.3.3         YES manual up                    up 
+Vlan1                  unassigned      YES unset  administratively down down
+IntRouter#conf ter
+
+IntRouter(config)#interface serial 0/1/1
+IntRouter(config-if)#no shut
+
+IntRouter(config-if)#ip address 192.168.1.254 255.255.255.192
+IntRouter(config-if)#
+07:19:59: %OSPF-5-ADJCHG: Process 1, Nbr 2.2.2.2 on Serial0/1/1 from LOADING to FULL, Loading Done
+
+IntRouter(config-if)#end
+IntRouter#
+%SYS-5-CONFIG_I: Configured from console by console
+
+IntRouter#show ip inter brief
+Interface              IP-Address      OK? Method Status                Protocol 
+GigabitEthernet0/0/0   unassigned      YES unset  administratively down down 
+GigabitEthernet0/0/1   8.8.8.100       YES DHCP   up                    up 
+Serial0/1/0            192.168.1.126   YES manual up                    up 
+Serial0/1/1            192.168.1.254   YES manual up                    up 
+Loopback0              3.3.3.3         YES manual up                    up 
+Vlan1                  unassigned      YES unset  administratively down down
+
+IntRouter#wr
+Building configuration...
+[OK]
+IntRouter#ping 8.8.8.8
+
+Type escape sequence to abort.
+Sending 5, 100-byte ICMP Echos to 8.8.8.8, timeout is 2 seconds:
+!!!!!
+Success rate is 100 percent (5/5), round-trip min/avg/max = 0/1/9 ms
